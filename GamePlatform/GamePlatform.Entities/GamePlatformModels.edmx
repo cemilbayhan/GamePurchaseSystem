@@ -1,0 +1,1270 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="GamePlatformModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Buy_ExtraPackage">
+          <Key>
+            <PropertyRef Name="OrderID" />
+          </Key>
+          <Property Name="OrderID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="GameID" Type="int" Nullable="false" />
+          <Property Name="ExtraPackageName" Type="char" MaxLength="40" Nullable="false" />
+          <Property Name="Price" Type="money" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Buy_Game">
+          <Key>
+            <PropertyRef Name="OrderID" />
+          </Key>
+          <Property Name="OrderID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="GameID" Type="int" Nullable="false" />
+          <Property Name="PackageID" Type="int" Nullable="false" />
+          <Property Name="Price" Type="money" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Customer_Wishlist">
+          <Key>
+            <PropertyRef Name="CustomerID" />
+            <PropertyRef Name="OrderGameID" />
+          </Key>
+          <Property Name="CustomerID" Type="int" Nullable="false" />
+          <Property Name="OrderExtraPackageID" Type="int" />
+          <Property Name="OrderGameID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Game_Genres">
+          <Key>
+            <PropertyRef Name="GameID" />
+            <PropertyRef Name="GenreID" />
+          </Key>
+          <Property Name="GameID" Type="int" Nullable="false" />
+          <Property Name="GenreID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="LanguageSupport_Audio">
+          <Key>
+            <PropertyRef Name="AudioLanguageID" />
+            <PropertyRef Name="GameID" />
+          </Key>
+          <Property Name="AudioLanguageID" Type="int" Nullable="false" />
+          <Property Name="GameID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="LanguageSupport_Texts">
+          <Key>
+            <PropertyRef Name="TextLanguageID" />
+            <PropertyRef Name="GameID" />
+          </Key>
+          <Property Name="TextLanguageID" Type="int" Nullable="false" />
+          <Property Name="GameID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Order_ExtraPackage">
+          <Key>
+            <PropertyRef Name="PurchaseID" />
+            <PropertyRef Name="CustomerID" />
+            <PropertyRef Name="OrderExtraPackageID" />
+          </Key>
+          <Property Name="PurchaseID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CustomerID" Type="int" Nullable="false" />
+          <Property Name="CouponID" Type="int" />
+          <Property Name="OrderExtraPackageID" Type="int" Nullable="false" />
+          <Property Name="PaymentDate" Type="date" Nullable="false" />
+          <Property Name="UploadOnDesktop" Type="char" MaxLength="3" Nullable="false" />
+          <Property Name="Price" Type="money" />
+        </EntityType>
+        <EntityType Name="Order_Game">
+          <Key>
+            <PropertyRef Name="PurchaseID" />
+            <PropertyRef Name="CustomerID" />
+          </Key>
+          <Property Name="PurchaseID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CustomerID" Type="int" Nullable="false" />
+          <Property Name="CouponID" Type="int" />
+          <Property Name="OrderGameID" Type="int" Nullable="false" />
+          <Property Name="PaymentDate" Type="date" Nullable="false" />
+          <Property Name="UploadOnDesktop" Type="char" MaxLength="1" Nullable="false" />
+          <Property Name="Price" Type="money" />
+        </EntityType>
+        <EntityType Name="Registration_Company">
+          <Key>
+            <PropertyRef Name="CompanyID" />
+          </Key>
+          <Property Name="CompanyID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CompanyName" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="Location" Type="varchar" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="Registration_Coupon">
+          <Key>
+            <PropertyRef Name="CouponID" />
+          </Key>
+          <Property Name="CouponID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CouponName" Type="char" MaxLength="20" Nullable="false" />
+          <Property Name="DiscountPercentage" Type="int" />
+          <Property Name="DiscountFee" Type="money" />
+          <Property Name="Explanation" Type="char" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Registration_Customer">
+          <Key>
+            <PropertyRef Name="CustomerID" />
+          </Key>
+          <Property Name="CustomerID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CustomerNickname" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="NameSurname" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="Age" Type="int" Nullable="false" />
+          <Property Name="RegisterDate" Type="date" />
+          <Property Name="Email" Type="varchar" MaxLength="40" />
+          <Property Name="Password" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="Location" Type="varchar" MaxLength="10" />
+          <Property Name="Address" Type="varchar" MaxLength="35" />
+          <Property Name="TelNumber" Type="varchar" MaxLength="15" />
+        </EntityType>
+        <EntityType Name="Registration_Game">
+          <Key>
+            <PropertyRef Name="GameID" />
+          </Key>
+          <Property Name="GameID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="GameName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="ReleaseDate" Type="date" />
+          <Property Name="AgeLimit" Type="int" />
+          <Property Name="DeveloperID" Type="int" Nullable="false" />
+          <Property Name="PublisherID" Type="int" Nullable="false" />
+          <Property Name="Explanation" Type="varchar" MaxLength="400" />
+          <Property Name="AvaragePoint" Type="float" />
+          <Property Name="OprSystem" Type="varchar" MaxLength="50" />
+          <Property Name="CPU" Type="varchar" MaxLength="50" />
+          <Property Name="Storage" Type="varchar" MaxLength="10" />
+          <Property Name="Graphics" Type="varchar" MaxLength="50" />
+          <Property Name="Memory" Type="varchar" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="Type_Genres">
+          <Key>
+            <PropertyRef Name="GenreID" />
+          </Key>
+          <Property Name="GenreID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="GrenreType" Type="varchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="Type_Language">
+          <Key>
+            <PropertyRef Name="LanguageID" />
+          </Key>
+          <Property Name="LanguageID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="LanguageName" Type="varchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Type_Package">
+          <Key>
+            <PropertyRef Name="PackageID" />
+          </Key>
+          <Property Name="PackageID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PackageName" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Type_Player">
+          <Key>
+            <PropertyRef Name="PlayerTypeID" />
+            <PropertyRef Name="GameID" />
+          </Key>
+          <Property Name="PlayerTypeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="GameID" Type="int" Nullable="false" />
+          <Property Name="Single" Type="varchar" MaxLength="3" Nullable="false" />
+          <Property Name="Multiplayer" Type="varchar" MaxLength="3" Nullable="false" />
+          <Property Name="Controller" Type="varchar" MaxLength="3" Nullable="false" />
+          <Property Name="Co-Op" Type="varchar" MaxLength="3" Nullable="false" />
+          <Property Name="VR" Type="varchar" MaxLength="3" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Customer_Purchase_Order_Game1">
+          <End Role="Buy_Game" Type="Self.Buy_Game" Multiplicity="1" />
+          <End Role="Order_Game" Type="Self.Order_Game" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Buy_Game">
+              <PropertyRef Name="OrderID" />
+            </Principal>
+            <Dependent Role="Order_Game">
+              <PropertyRef Name="OrderGameID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Customer_Purchase_Registration_Coupon">
+          <End Role="Registration_Coupon" Type="Self.Registration_Coupon" Multiplicity="0..1" />
+          <End Role="Order_Game" Type="Self.Order_Game" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Registration_Coupon">
+              <PropertyRef Name="CouponID" />
+            </Principal>
+            <Dependent Role="Order_Game">
+              <PropertyRef Name="CouponID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Customer_Purchase_Registration_Customer">
+          <End Role="Registration_Customer" Type="Self.Registration_Customer" Multiplicity="1" />
+          <End Role="Order_Game" Type="Self.Order_Game" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Registration_Customer">
+              <PropertyRef Name="CustomerID" />
+            </Principal>
+            <Dependent Role="Order_Game">
+              <PropertyRef Name="CustomerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Customer_Wishlist_Order_ExtraPackage">
+          <End Role="Buy_ExtraPackage" Type="Self.Buy_ExtraPackage" Multiplicity="0..1" />
+          <End Role="Customer_Wishlist" Type="Self.Customer_Wishlist" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Buy_ExtraPackage">
+              <PropertyRef Name="OrderID" />
+            </Principal>
+            <Dependent Role="Customer_Wishlist">
+              <PropertyRef Name="OrderExtraPackageID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Customer_Wishlist_Order_Game">
+          <End Role="Buy_Game" Type="Self.Buy_Game" Multiplicity="1" />
+          <End Role="Customer_Wishlist" Type="Self.Customer_Wishlist" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Buy_Game">
+              <PropertyRef Name="OrderID" />
+            </Principal>
+            <Dependent Role="Customer_Wishlist">
+              <PropertyRef Name="OrderGameID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Customer_Wishlist_Registration_Customer">
+          <End Role="Registration_Customer" Type="Self.Registration_Customer" Multiplicity="1" />
+          <End Role="Customer_Wishlist" Type="Self.Customer_Wishlist" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Registration_Customer">
+              <PropertyRef Name="CustomerID" />
+            </Principal>
+            <Dependent Role="Customer_Wishlist">
+              <PropertyRef Name="CustomerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Game_Genres_Registration_Game">
+          <End Role="Registration_Game" Type="Self.Registration_Game" Multiplicity="1" />
+          <End Role="Game_Genres" Type="Self.Game_Genres" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Registration_Game">
+              <PropertyRef Name="GameID" />
+            </Principal>
+            <Dependent Role="Game_Genres">
+              <PropertyRef Name="GameID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Game_Genres_Type_Genres">
+          <End Role="Type_Genres" Type="Self.Type_Genres" Multiplicity="1" />
+          <End Role="Game_Genres" Type="Self.Game_Genres" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Type_Genres">
+              <PropertyRef Name="GenreID" />
+            </Principal>
+            <Dependent Role="Game_Genres">
+              <PropertyRef Name="GenreID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LanguageSupport_Audio_Registration_Game">
+          <End Role="Registration_Game" Type="Self.Registration_Game" Multiplicity="1" />
+          <End Role="LanguageSupport_Audio" Type="Self.LanguageSupport_Audio" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Registration_Game">
+              <PropertyRef Name="GameID" />
+            </Principal>
+            <Dependent Role="LanguageSupport_Audio">
+              <PropertyRef Name="GameID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LanguageSupport_Audio_Type_Language">
+          <End Role="Type_Language" Type="Self.Type_Language" Multiplicity="1" />
+          <End Role="LanguageSupport_Audio" Type="Self.LanguageSupport_Audio" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Type_Language">
+              <PropertyRef Name="LanguageID" />
+            </Principal>
+            <Dependent Role="LanguageSupport_Audio">
+              <PropertyRef Name="AudioLanguageID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LanguageSupport_Texts_Registration_Game">
+          <End Role="Registration_Game" Type="Self.Registration_Game" Multiplicity="1" />
+          <End Role="LanguageSupport_Texts" Type="Self.LanguageSupport_Texts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Registration_Game">
+              <PropertyRef Name="GameID" />
+            </Principal>
+            <Dependent Role="LanguageSupport_Texts">
+              <PropertyRef Name="GameID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LanguageSupport_Texts_Type_Language">
+          <End Role="Type_Language" Type="Self.Type_Language" Multiplicity="1" />
+          <End Role="LanguageSupport_Texts" Type="Self.LanguageSupport_Texts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Type_Language">
+              <PropertyRef Name="LanguageID" />
+            </Principal>
+            <Dependent Role="LanguageSupport_Texts">
+              <PropertyRef Name="TextLanguageID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Order_ExtraPackage_Buy_ExtraPackage">
+          <End Role="Buy_ExtraPackage" Type="Self.Buy_ExtraPackage" Multiplicity="1" />
+          <End Role="Order_ExtraPackage" Type="Self.Order_ExtraPackage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Buy_ExtraPackage">
+              <PropertyRef Name="OrderID" />
+            </Principal>
+            <Dependent Role="Order_ExtraPackage">
+              <PropertyRef Name="OrderExtraPackageID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Order_ExtraPackage_Registration_Coupon">
+          <End Role="Registration_Coupon" Type="Self.Registration_Coupon" Multiplicity="0..1" />
+          <End Role="Order_ExtraPackage" Type="Self.Order_ExtraPackage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Registration_Coupon">
+              <PropertyRef Name="CouponID" />
+            </Principal>
+            <Dependent Role="Order_ExtraPackage">
+              <PropertyRef Name="CouponID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Order_ExtraPackage_Registration_Customer">
+          <End Role="Registration_Customer" Type="Self.Registration_Customer" Multiplicity="1" />
+          <End Role="Order_ExtraPackage" Type="Self.Order_ExtraPackage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Registration_Customer">
+              <PropertyRef Name="CustomerID" />
+            </Principal>
+            <Dependent Role="Order_ExtraPackage">
+              <PropertyRef Name="CustomerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Order_ExtraPackage_Registration_Game">
+          <End Role="Registration_Game" Type="Self.Registration_Game" Multiplicity="1" />
+          <End Role="Buy_ExtraPackage" Type="Self.Buy_ExtraPackage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Registration_Game">
+              <PropertyRef Name="GameID" />
+            </Principal>
+            <Dependent Role="Buy_ExtraPackage">
+              <PropertyRef Name="GameID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Order_Game_Registration_Game">
+          <End Role="Registration_Game" Type="Self.Registration_Game" Multiplicity="1" />
+          <End Role="Buy_Game" Type="Self.Buy_Game" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Registration_Game">
+              <PropertyRef Name="GameID" />
+            </Principal>
+            <Dependent Role="Buy_Game">
+              <PropertyRef Name="GameID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Order_Game_Type_Package">
+          <End Role="Type_Package" Type="Self.Type_Package" Multiplicity="1" />
+          <End Role="Buy_Game" Type="Self.Buy_Game" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Type_Package">
+              <PropertyRef Name="PackageID" />
+            </Principal>
+            <Dependent Role="Buy_Game">
+              <PropertyRef Name="PackageID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Registration_Game_Registration_Company">
+          <End Role="Registration_Company" Type="Self.Registration_Company" Multiplicity="1" />
+          <End Role="Registration_Game" Type="Self.Registration_Game" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Registration_Company">
+              <PropertyRef Name="CompanyID" />
+            </Principal>
+            <Dependent Role="Registration_Game">
+              <PropertyRef Name="PublisherID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Registration_Game_Registration_Company1">
+          <End Role="Registration_Company" Type="Self.Registration_Company" Multiplicity="1" />
+          <End Role="Registration_Game" Type="Self.Registration_Game" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Registration_Company">
+              <PropertyRef Name="CompanyID" />
+            </Principal>
+            <Dependent Role="Registration_Game">
+              <PropertyRef Name="DeveloperID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Type_Player_Registration_Game">
+          <End Role="Registration_Game" Type="Self.Registration_Game" Multiplicity="1" />
+          <End Role="Type_Player" Type="Self.Type_Player" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Registration_Game">
+              <PropertyRef Name="GameID" />
+            </Principal>
+            <Dependent Role="Type_Player">
+              <PropertyRef Name="GameID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="SP_GetBuyExtra" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="SP_GetBuyGame" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="SP_GetGames" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <EntityContainer Name="GamePlatformModelStoreContainer">
+          <EntitySet Name="Buy_ExtraPackage" EntityType="Self.Buy_ExtraPackage" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Buy_Game" EntityType="Self.Buy_Game" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Customer_Wishlist" EntityType="Self.Customer_Wishlist" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Game_Genres" EntityType="Self.Game_Genres" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LanguageSupport_Audio" EntityType="Self.LanguageSupport_Audio" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LanguageSupport_Texts" EntityType="Self.LanguageSupport_Texts" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Order_ExtraPackage" EntityType="Self.Order_ExtraPackage" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Order_Game" EntityType="Self.Order_Game" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Registration_Company" EntityType="Self.Registration_Company" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Registration_Coupon" EntityType="Self.Registration_Coupon" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Registration_Customer" EntityType="Self.Registration_Customer" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Registration_Game" EntityType="Self.Registration_Game" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Type_Genres" EntityType="Self.Type_Genres" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Type_Language" EntityType="Self.Type_Language" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Type_Package" EntityType="Self.Type_Package" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Type_Player" EntityType="Self.Type_Player" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Customer_Purchase_Order_Game1" Association="Self.FK_Customer_Purchase_Order_Game1">
+            <End Role="Buy_Game" EntitySet="Buy_Game" />
+            <End Role="Order_Game" EntitySet="Order_Game" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Customer_Purchase_Registration_Coupon" Association="Self.FK_Customer_Purchase_Registration_Coupon">
+            <End Role="Registration_Coupon" EntitySet="Registration_Coupon" />
+            <End Role="Order_Game" EntitySet="Order_Game" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Customer_Purchase_Registration_Customer" Association="Self.FK_Customer_Purchase_Registration_Customer">
+            <End Role="Registration_Customer" EntitySet="Registration_Customer" />
+            <End Role="Order_Game" EntitySet="Order_Game" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Customer_Wishlist_Order_ExtraPackage" Association="Self.FK_Customer_Wishlist_Order_ExtraPackage">
+            <End Role="Buy_ExtraPackage" EntitySet="Buy_ExtraPackage" />
+            <End Role="Customer_Wishlist" EntitySet="Customer_Wishlist" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Customer_Wishlist_Order_Game" Association="Self.FK_Customer_Wishlist_Order_Game">
+            <End Role="Buy_Game" EntitySet="Buy_Game" />
+            <End Role="Customer_Wishlist" EntitySet="Customer_Wishlist" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Customer_Wishlist_Registration_Customer" Association="Self.FK_Customer_Wishlist_Registration_Customer">
+            <End Role="Registration_Customer" EntitySet="Registration_Customer" />
+            <End Role="Customer_Wishlist" EntitySet="Customer_Wishlist" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Game_Genres_Registration_Game" Association="Self.FK_Game_Genres_Registration_Game">
+            <End Role="Registration_Game" EntitySet="Registration_Game" />
+            <End Role="Game_Genres" EntitySet="Game_Genres" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Game_Genres_Type_Genres" Association="Self.FK_Game_Genres_Type_Genres">
+            <End Role="Type_Genres" EntitySet="Type_Genres" />
+            <End Role="Game_Genres" EntitySet="Game_Genres" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LanguageSupport_Audio_Registration_Game" Association="Self.FK_LanguageSupport_Audio_Registration_Game">
+            <End Role="Registration_Game" EntitySet="Registration_Game" />
+            <End Role="LanguageSupport_Audio" EntitySet="LanguageSupport_Audio" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LanguageSupport_Audio_Type_Language" Association="Self.FK_LanguageSupport_Audio_Type_Language">
+            <End Role="Type_Language" EntitySet="Type_Language" />
+            <End Role="LanguageSupport_Audio" EntitySet="LanguageSupport_Audio" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LanguageSupport_Texts_Registration_Game" Association="Self.FK_LanguageSupport_Texts_Registration_Game">
+            <End Role="Registration_Game" EntitySet="Registration_Game" />
+            <End Role="LanguageSupport_Texts" EntitySet="LanguageSupport_Texts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LanguageSupport_Texts_Type_Language" Association="Self.FK_LanguageSupport_Texts_Type_Language">
+            <End Role="Type_Language" EntitySet="Type_Language" />
+            <End Role="LanguageSupport_Texts" EntitySet="LanguageSupport_Texts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Order_ExtraPackage_Buy_ExtraPackage" Association="Self.FK_Order_ExtraPackage_Buy_ExtraPackage">
+            <End Role="Buy_ExtraPackage" EntitySet="Buy_ExtraPackage" />
+            <End Role="Order_ExtraPackage" EntitySet="Order_ExtraPackage" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Order_ExtraPackage_Registration_Coupon" Association="Self.FK_Order_ExtraPackage_Registration_Coupon">
+            <End Role="Registration_Coupon" EntitySet="Registration_Coupon" />
+            <End Role="Order_ExtraPackage" EntitySet="Order_ExtraPackage" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Order_ExtraPackage_Registration_Customer" Association="Self.FK_Order_ExtraPackage_Registration_Customer">
+            <End Role="Registration_Customer" EntitySet="Registration_Customer" />
+            <End Role="Order_ExtraPackage" EntitySet="Order_ExtraPackage" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Order_ExtraPackage_Registration_Game" Association="Self.FK_Order_ExtraPackage_Registration_Game">
+            <End Role="Registration_Game" EntitySet="Registration_Game" />
+            <End Role="Buy_ExtraPackage" EntitySet="Buy_ExtraPackage" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Order_Game_Registration_Game" Association="Self.FK_Order_Game_Registration_Game">
+            <End Role="Registration_Game" EntitySet="Registration_Game" />
+            <End Role="Buy_Game" EntitySet="Buy_Game" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Order_Game_Type_Package" Association="Self.FK_Order_Game_Type_Package">
+            <End Role="Type_Package" EntitySet="Type_Package" />
+            <End Role="Buy_Game" EntitySet="Buy_Game" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Registration_Game_Registration_Company" Association="Self.FK_Registration_Game_Registration_Company">
+            <End Role="Registration_Company" EntitySet="Registration_Company" />
+            <End Role="Registration_Game" EntitySet="Registration_Game" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Registration_Game_Registration_Company1" Association="Self.FK_Registration_Game_Registration_Company1">
+            <End Role="Registration_Company" EntitySet="Registration_Company" />
+            <End Role="Registration_Game" EntitySet="Registration_Game" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Type_Player_Registration_Game" Association="Self.FK_Type_Player_Registration_Game">
+            <End Role="Registration_Game" EntitySet="Registration_Game" />
+            <End Role="Type_Player" EntitySet="Type_Player" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="GamePlatformModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Buy_ExtraPackage">
+          <Key>
+            <PropertyRef Name="OrderID" />
+          </Key>
+          <Property Name="OrderID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="GameID" Type="Int32" Nullable="false" />
+          <Property Name="ExtraPackageName" Type="String" MaxLength="40" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="Price" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <NavigationProperty Name="Customer_Wishlist" Relationship="Self.FK_Customer_Wishlist_Order_ExtraPackage" FromRole="Buy_ExtraPackage" ToRole="Customer_Wishlist" />
+          <NavigationProperty Name="Order_ExtraPackage" Relationship="Self.FK_Order_ExtraPackage_Buy_ExtraPackage" FromRole="Buy_ExtraPackage" ToRole="Order_ExtraPackage" />
+          <NavigationProperty Name="Registration_Game" Relationship="Self.FK_Order_ExtraPackage_Registration_Game" FromRole="Buy_ExtraPackage" ToRole="Registration_Game" />
+        </EntityType>
+        <EntityType Name="Buy_Game">
+          <Key>
+            <PropertyRef Name="OrderID" />
+          </Key>
+          <Property Name="OrderID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="GameID" Type="Int32" Nullable="false" />
+          <Property Name="PackageID" Type="Int32" Nullable="false" />
+          <Property Name="Price" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <NavigationProperty Name="Order_Game" Relationship="Self.FK_Customer_Purchase_Order_Game1" FromRole="Buy_Game" ToRole="Order_Game" />
+          <NavigationProperty Name="Customer_Wishlist" Relationship="Self.FK_Customer_Wishlist_Order_Game" FromRole="Buy_Game" ToRole="Customer_Wishlist" />
+          <NavigationProperty Name="Registration_Game" Relationship="Self.FK_Order_Game_Registration_Game" FromRole="Buy_Game" ToRole="Registration_Game" />
+          <NavigationProperty Name="Type_Package" Relationship="Self.FK_Order_Game_Type_Package" FromRole="Buy_Game" ToRole="Type_Package" />
+        </EntityType>
+        <EntityType Name="Customer_Wishlist">
+          <Key>
+            <PropertyRef Name="CustomerID" />
+            <PropertyRef Name="OrderGameID" />
+          </Key>
+          <Property Name="CustomerID" Type="Int32" Nullable="false" />
+          <Property Name="OrderExtraPackageID" Type="Int32" />
+          <Property Name="OrderGameID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Buy_ExtraPackage" Relationship="Self.FK_Customer_Wishlist_Order_ExtraPackage" FromRole="Customer_Wishlist" ToRole="Buy_ExtraPackage" />
+          <NavigationProperty Name="Buy_Game" Relationship="Self.FK_Customer_Wishlist_Order_Game" FromRole="Customer_Wishlist" ToRole="Buy_Game" />
+          <NavigationProperty Name="Registration_Customer" Relationship="GamePlatformModel.FK_Customer_Wishlist_Registration_Customer" FromRole="Customer_Wishlist" ToRole="Registration_Customer" />
+        </EntityType>
+        <EntityType Name="Order_ExtraPackage">
+          <Key>
+            <PropertyRef Name="PurchaseID" />
+            <PropertyRef Name="CustomerID" />
+            <PropertyRef Name="OrderExtraPackageID" />
+          </Key>
+          <Property Name="PurchaseID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CustomerID" Type="Int32" Nullable="false" />
+          <Property Name="CouponID" Type="Int32" />
+          <Property Name="OrderExtraPackageID" Type="Int32" Nullable="false" />
+          <Property Name="PaymentDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="UploadOnDesktop" Type="String" MaxLength="3" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="Price" Type="Decimal" Precision="19" Scale="4" />
+          <NavigationProperty Name="Buy_ExtraPackage" Relationship="Self.FK_Order_ExtraPackage_Buy_ExtraPackage" FromRole="Order_ExtraPackage" ToRole="Buy_ExtraPackage" />
+          <NavigationProperty Name="Registration_Coupon" Relationship="Self.FK_Order_ExtraPackage_Registration_Coupon" FromRole="Order_ExtraPackage" ToRole="Registration_Coupon" />
+          <NavigationProperty Name="Registration_Customer" Relationship="GamePlatformModel.FK_Order_ExtraPackage_Registration_Customer" FromRole="Order_ExtraPackage" ToRole="Registration_Customer" />
+        </EntityType>
+        <EntityType Name="Order_Game">
+          <Key>
+            <PropertyRef Name="PurchaseID" />
+            <PropertyRef Name="CustomerID" />
+          </Key>
+          <Property Name="PurchaseID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CustomerID" Type="Int32" Nullable="false" />
+          <Property Name="CouponID" Type="Int32" />
+          <Property Name="OrderGameID" Type="Int32" Nullable="false" />
+          <Property Name="PaymentDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="UploadOnDesktop" Type="String" MaxLength="1" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="Price" Type="Decimal" Precision="19" Scale="4" />
+          <NavigationProperty Name="Buy_Game" Relationship="Self.FK_Customer_Purchase_Order_Game1" FromRole="Order_Game" ToRole="Buy_Game" />
+          <NavigationProperty Name="Registration_Coupon" Relationship="Self.FK_Customer_Purchase_Registration_Coupon" FromRole="Order_Game" ToRole="Registration_Coupon" />
+          <NavigationProperty Name="Registration_Customer" Relationship="GamePlatformModel.FK_Customer_Purchase_Registration_Customer" FromRole="Order_Game" ToRole="Registration_Customer" />
+        </EntityType>
+        <EntityType Name="Registration_Company">
+          <Key>
+            <PropertyRef Name="CompanyID" />
+          </Key>
+          <Property Name="CompanyID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CompanyName" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Location" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Registration_Game" Relationship="Self.FK_Registration_Game_Registration_Company" FromRole="Registration_Company" ToRole="Registration_Game" />
+          <NavigationProperty Name="Registration_Game1" Relationship="Self.FK_Registration_Game_Registration_Company1" FromRole="Registration_Company" ToRole="Registration_Game" />
+        </EntityType>
+        <EntityType Name="Registration_Coupon">
+          <Key>
+            <PropertyRef Name="CouponID" />
+          </Key>
+          <Property Name="CouponID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CouponName" Type="String" MaxLength="20" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="DiscountPercentage" Type="Int32" />
+          <Property Name="DiscountFee" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="Explanation" Type="String" MaxLength="50" FixedLength="true" Unicode="false" />
+          <NavigationProperty Name="Order_ExtraPackage" Relationship="Self.FK_Order_ExtraPackage_Registration_Coupon" FromRole="Registration_Coupon" ToRole="Order_ExtraPackage" />
+          <NavigationProperty Name="Order_Game" Relationship="Self.FK_Customer_Purchase_Registration_Coupon" FromRole="Registration_Coupon" ToRole="Order_Game" />
+        </EntityType>
+        <EntityType Name="Registration_Game">
+          <Key>
+            <PropertyRef Name="GameID" />
+          </Key>
+          <Property Name="GameID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="GameName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ReleaseDate" Type="DateTime" Precision="0" />
+          <Property Name="AgeLimit" Type="Int32" />
+          <Property Name="DeveloperID" Type="Int32" Nullable="false" />
+          <Property Name="PublisherID" Type="Int32" Nullable="false" />
+          <Property Name="Explanation" Type="String" MaxLength="400" FixedLength="false" Unicode="false" />
+          <Property Name="AvaragePoint" Type="Double" />
+          <Property Name="OprSystem" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CPU" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Storage" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Graphics" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Memory" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Buy_ExtraPackage" Relationship="Self.FK_Order_ExtraPackage_Registration_Game" FromRole="Registration_Game" ToRole="Buy_ExtraPackage" />
+          <NavigationProperty Name="Buy_Game" Relationship="Self.FK_Order_Game_Registration_Game" FromRole="Registration_Game" ToRole="Buy_Game" />
+          <NavigationProperty Name="Registration_Company" Relationship="Self.FK_Registration_Game_Registration_Company" FromRole="Registration_Game" ToRole="Registration_Company" />
+          <NavigationProperty Name="Registration_Company1" Relationship="Self.FK_Registration_Game_Registration_Company1" FromRole="Registration_Game" ToRole="Registration_Company" />
+          <NavigationProperty Name="Type_Player" Relationship="Self.FK_Type_Player_Registration_Game" FromRole="Registration_Game" ToRole="Type_Player" />
+          <NavigationProperty Name="Type_Genres" Relationship="Self.Game_Genres" FromRole="Registration_Game" ToRole="Type_Genres" />
+          <NavigationProperty Name="Type_Language" Relationship="Self.LanguageSupport_Audio" FromRole="Registration_Game" ToRole="Type_Language" />
+          <NavigationProperty Name="Type_Language1" Relationship="Self.LanguageSupport_Texts" FromRole="Registration_Game" ToRole="Type_Language" />
+        </EntityType>
+        <EntityType Name="Type_Genres">
+          <Key>
+            <PropertyRef Name="GenreID" />
+          </Key>
+          <Property Name="GenreID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="GrenreType" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Registration_Game" Relationship="Self.Game_Genres" FromRole="Type_Genres" ToRole="Registration_Game" />
+        </EntityType>
+        <EntityType Name="Type_Language">
+          <Key>
+            <PropertyRef Name="LanguageID" />
+          </Key>
+          <Property Name="LanguageID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="LanguageName" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Registration_Game" Relationship="Self.LanguageSupport_Audio" FromRole="Type_Language" ToRole="Registration_Game" />
+          <NavigationProperty Name="Registration_Game1" Relationship="Self.LanguageSupport_Texts" FromRole="Type_Language" ToRole="Registration_Game" />
+        </EntityType>
+        <EntityType Name="Type_Package">
+          <Key>
+            <PropertyRef Name="PackageID" />
+          </Key>
+          <Property Name="PackageID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PackageName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Buy_Game" Relationship="Self.FK_Order_Game_Type_Package" FromRole="Type_Package" ToRole="Buy_Game" />
+        </EntityType>
+        <EntityType Name="Type_Player">
+          <Key>
+            <PropertyRef Name="PlayerTypeID" />
+            <PropertyRef Name="GameID" />
+          </Key>
+          <Property Name="PlayerTypeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="GameID" Type="Int32" Nullable="false" />
+          <Property Name="Single" Type="String" MaxLength="3" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Multiplayer" Type="String" MaxLength="3" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Controller" Type="String" MaxLength="3" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Co_Op" Type="String" MaxLength="3" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="VR" Type="String" MaxLength="3" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Registration_Game" Relationship="Self.FK_Type_Player_Registration_Game" FromRole="Type_Player" ToRole="Registration_Game" />
+        </EntityType>
+        <Association Name="FK_Customer_Wishlist_Order_ExtraPackage">
+          <End Role="Buy_ExtraPackage" Type="Self.Buy_ExtraPackage" Multiplicity="0..1" />
+          <End Role="Customer_Wishlist" Type="Self.Customer_Wishlist" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Buy_ExtraPackage">
+              <PropertyRef Name="OrderID" />
+            </Principal>
+            <Dependent Role="Customer_Wishlist">
+              <PropertyRef Name="OrderExtraPackageID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Order_ExtraPackage_Buy_ExtraPackage">
+          <End Role="Buy_ExtraPackage" Type="Self.Buy_ExtraPackage" Multiplicity="1" />
+          <End Role="Order_ExtraPackage" Type="Self.Order_ExtraPackage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Buy_ExtraPackage">
+              <PropertyRef Name="OrderID" />
+            </Principal>
+            <Dependent Role="Order_ExtraPackage">
+              <PropertyRef Name="OrderExtraPackageID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Order_ExtraPackage_Registration_Game">
+          <End Role="Registration_Game" Type="Self.Registration_Game" Multiplicity="1" />
+          <End Role="Buy_ExtraPackage" Type="Self.Buy_ExtraPackage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Registration_Game">
+              <PropertyRef Name="GameID" />
+            </Principal>
+            <Dependent Role="Buy_ExtraPackage">
+              <PropertyRef Name="GameID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Customer_Purchase_Order_Game1">
+          <End Role="Buy_Game" Type="Self.Buy_Game" Multiplicity="1" />
+          <End Role="Order_Game" Type="Self.Order_Game" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Buy_Game">
+              <PropertyRef Name="OrderID" />
+            </Principal>
+            <Dependent Role="Order_Game">
+              <PropertyRef Name="OrderGameID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Customer_Wishlist_Order_Game">
+          <End Role="Buy_Game" Type="Self.Buy_Game" Multiplicity="1" />
+          <End Role="Customer_Wishlist" Type="Self.Customer_Wishlist" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Buy_Game">
+              <PropertyRef Name="OrderID" />
+            </Principal>
+            <Dependent Role="Customer_Wishlist">
+              <PropertyRef Name="OrderGameID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Order_Game_Registration_Game">
+          <End Role="Registration_Game" Type="Self.Registration_Game" Multiplicity="1" />
+          <End Role="Buy_Game" Type="Self.Buy_Game" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Registration_Game">
+              <PropertyRef Name="GameID" />
+            </Principal>
+            <Dependent Role="Buy_Game">
+              <PropertyRef Name="GameID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Order_Game_Type_Package">
+          <End Role="Type_Package" Type="Self.Type_Package" Multiplicity="1" />
+          <End Role="Buy_Game" Type="Self.Buy_Game" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Type_Package">
+              <PropertyRef Name="PackageID" />
+            </Principal>
+            <Dependent Role="Buy_Game">
+              <PropertyRef Name="PackageID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Order_ExtraPackage_Registration_Coupon">
+          <End Role="Registration_Coupon" Type="Self.Registration_Coupon" Multiplicity="0..1" />
+          <End Role="Order_ExtraPackage" Type="Self.Order_ExtraPackage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Registration_Coupon">
+              <PropertyRef Name="CouponID" />
+            </Principal>
+            <Dependent Role="Order_ExtraPackage">
+              <PropertyRef Name="CouponID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Customer_Purchase_Registration_Coupon">
+          <End Role="Registration_Coupon" Type="Self.Registration_Coupon" Multiplicity="0..1" />
+          <End Role="Order_Game" Type="Self.Order_Game" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Registration_Coupon">
+              <PropertyRef Name="CouponID" />
+            </Principal>
+            <Dependent Role="Order_Game">
+              <PropertyRef Name="CouponID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Registration_Game_Registration_Company">
+          <End Role="Registration_Company" Type="Self.Registration_Company" Multiplicity="1" />
+          <End Role="Registration_Game" Type="Self.Registration_Game" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Registration_Company">
+              <PropertyRef Name="CompanyID" />
+            </Principal>
+            <Dependent Role="Registration_Game">
+              <PropertyRef Name="PublisherID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Registration_Game_Registration_Company1">
+          <End Role="Registration_Company" Type="Self.Registration_Company" Multiplicity="1" />
+          <End Role="Registration_Game" Type="Self.Registration_Game" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Registration_Company">
+              <PropertyRef Name="CompanyID" />
+            </Principal>
+            <Dependent Role="Registration_Game">
+              <PropertyRef Name="DeveloperID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Type_Player_Registration_Game">
+          <End Role="Registration_Game" Type="Self.Registration_Game" Multiplicity="1" />
+          <End Role="Type_Player" Type="Self.Type_Player" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Registration_Game">
+              <PropertyRef Name="GameID" />
+            </Principal>
+            <Dependent Role="Type_Player">
+              <PropertyRef Name="GameID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Game_Genres">
+          <End Role="Registration_Game" Type="Self.Registration_Game" Multiplicity="*" />
+          <End Role="Type_Genres" Type="Self.Type_Genres" Multiplicity="*" />
+        </Association>
+        <Association Name="LanguageSupport_Audio">
+          <End Role="Registration_Game" Type="Self.Registration_Game" Multiplicity="*" />
+          <End Role="Type_Language" Type="Self.Type_Language" Multiplicity="*" />
+        </Association>
+        <Association Name="LanguageSupport_Texts">
+          <End Role="Registration_Game" Type="Self.Registration_Game" Multiplicity="*" />
+          <End Role="Type_Language" Type="Self.Type_Language" Multiplicity="*" />
+        </Association>
+        <EntityContainer Name="GamePlatformEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Buy_ExtraPackage" EntityType="Self.Buy_ExtraPackage" />
+          <EntitySet Name="Buy_Game" EntityType="Self.Buy_Game" />
+          <EntitySet Name="Customer_Wishlist" EntityType="Self.Customer_Wishlist" />
+          <EntitySet Name="Order_ExtraPackage" EntityType="Self.Order_ExtraPackage" />
+          <EntitySet Name="Order_Game" EntityType="Self.Order_Game" />
+          <EntitySet Name="Registration_Company" EntityType="Self.Registration_Company" />
+          <EntitySet Name="Registration_Coupon" EntityType="Self.Registration_Coupon" />
+          <EntitySet Name="Registration_Game" EntityType="Self.Registration_Game" />
+          <EntitySet Name="Type_Genres" EntityType="Self.Type_Genres" />
+          <EntitySet Name="Type_Language" EntityType="Self.Type_Language" />
+          <EntitySet Name="Type_Package" EntityType="Self.Type_Package" />
+          <EntitySet Name="Type_Player" EntityType="Self.Type_Player" />
+          <AssociationSet Name="FK_Customer_Wishlist_Order_ExtraPackage" Association="Self.FK_Customer_Wishlist_Order_ExtraPackage">
+            <End Role="Buy_ExtraPackage" EntitySet="Buy_ExtraPackage" />
+            <End Role="Customer_Wishlist" EntitySet="Customer_Wishlist" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Order_ExtraPackage_Buy_ExtraPackage" Association="Self.FK_Order_ExtraPackage_Buy_ExtraPackage">
+            <End Role="Buy_ExtraPackage" EntitySet="Buy_ExtraPackage" />
+            <End Role="Order_ExtraPackage" EntitySet="Order_ExtraPackage" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Order_ExtraPackage_Registration_Game" Association="Self.FK_Order_ExtraPackage_Registration_Game">
+            <End Role="Registration_Game" EntitySet="Registration_Game" />
+            <End Role="Buy_ExtraPackage" EntitySet="Buy_ExtraPackage" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Customer_Purchase_Order_Game1" Association="Self.FK_Customer_Purchase_Order_Game1">
+            <End Role="Buy_Game" EntitySet="Buy_Game" />
+            <End Role="Order_Game" EntitySet="Order_Game" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Customer_Wishlist_Order_Game" Association="Self.FK_Customer_Wishlist_Order_Game">
+            <End Role="Buy_Game" EntitySet="Buy_Game" />
+            <End Role="Customer_Wishlist" EntitySet="Customer_Wishlist" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Order_Game_Registration_Game" Association="Self.FK_Order_Game_Registration_Game">
+            <End Role="Registration_Game" EntitySet="Registration_Game" />
+            <End Role="Buy_Game" EntitySet="Buy_Game" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Order_Game_Type_Package" Association="Self.FK_Order_Game_Type_Package">
+            <End Role="Type_Package" EntitySet="Type_Package" />
+            <End Role="Buy_Game" EntitySet="Buy_Game" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Order_ExtraPackage_Registration_Coupon" Association="Self.FK_Order_ExtraPackage_Registration_Coupon">
+            <End Role="Registration_Coupon" EntitySet="Registration_Coupon" />
+            <End Role="Order_ExtraPackage" EntitySet="Order_ExtraPackage" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Customer_Purchase_Registration_Coupon" Association="Self.FK_Customer_Purchase_Registration_Coupon">
+            <End Role="Registration_Coupon" EntitySet="Registration_Coupon" />
+            <End Role="Order_Game" EntitySet="Order_Game" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Registration_Game_Registration_Company" Association="Self.FK_Registration_Game_Registration_Company">
+            <End Role="Registration_Company" EntitySet="Registration_Company" />
+            <End Role="Registration_Game" EntitySet="Registration_Game" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Registration_Game_Registration_Company1" Association="Self.FK_Registration_Game_Registration_Company1">
+            <End Role="Registration_Company" EntitySet="Registration_Company" />
+            <End Role="Registration_Game" EntitySet="Registration_Game" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Type_Player_Registration_Game" Association="Self.FK_Type_Player_Registration_Game">
+            <End Role="Registration_Game" EntitySet="Registration_Game" />
+            <End Role="Type_Player" EntitySet="Type_Player" />
+          </AssociationSet>
+          <AssociationSet Name="Game_Genres" Association="Self.Game_Genres">
+            <End Role="Registration_Game" EntitySet="Registration_Game" />
+            <End Role="Type_Genres" EntitySet="Type_Genres" />
+          </AssociationSet>
+          <AssociationSet Name="LanguageSupport_Audio" Association="Self.LanguageSupport_Audio">
+            <End Role="Registration_Game" EntitySet="Registration_Game" />
+            <End Role="Type_Language" EntitySet="Type_Language" />
+          </AssociationSet>
+          <AssociationSet Name="LanguageSupport_Texts" Association="Self.LanguageSupport_Texts">
+            <End Role="Registration_Game" EntitySet="Registration_Game" />
+            <End Role="Type_Language" EntitySet="Type_Language" />
+          </AssociationSet>
+          <EntitySet Name="Registration_Customer" EntityType="GamePlatformModel.Registration_Customer" />
+          <AssociationSet Name="FK_Customer_Wishlist_Registration_Customer" Association="GamePlatformModel.FK_Customer_Wishlist_Registration_Customer">
+            <End Role="Registration_Customer" EntitySet="Registration_Customer" />
+            <End Role="Customer_Wishlist" EntitySet="Customer_Wishlist" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Order_ExtraPackage_Registration_Customer" Association="GamePlatformModel.FK_Order_ExtraPackage_Registration_Customer">
+            <End Role="Registration_Customer" EntitySet="Registration_Customer" />
+            <End Role="Order_ExtraPackage" EntitySet="Order_ExtraPackage" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Customer_Purchase_Registration_Customer" Association="GamePlatformModel.FK_Customer_Purchase_Registration_Customer">
+            <End Role="Registration_Customer" EntitySet="Registration_Customer" />
+            <End Role="Order_Game" EntitySet="Order_Game" />
+          </AssociationSet>
+          <FunctionImport Name="SP_GetGames" ReturnType="Collection(GamePlatformModel.SP_GetGames_Result)" />
+          <FunctionImport Name="SP_GetBuyGame" ReturnType="Collection(GamePlatformModel.SP_GetBuyGame_Result)" />
+          <FunctionImport Name="SP_GetBuyGame1" ReturnType="Collection(GamePlatformModel.SP_GetBuyGame1_Result)" />
+          <FunctionImport Name="SP_GetBuyExtra" ReturnType="Collection(GamePlatformModel.SP_GetBuyExtra_Result)" />
+        </EntityContainer>
+        <EntityType Name="Registration_Customer">
+          <Key>
+            <PropertyRef Name="CustomerID" />
+          </Key>
+          <Property Name="CustomerID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CustomerNickname" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="NameSurname" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="Age" Type="Int32" Nullable="false" />
+          <Property Name="RegisterDate" Type="DateTime" Precision="0" />
+          <Property Name="Email" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
+          <Property Name="Password" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Location" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Address" Type="String" MaxLength="35" FixedLength="false" Unicode="false" />
+          <Property Name="TelNumber" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Customer_Wishlist" Relationship="GamePlatformModel.FK_Customer_Wishlist_Registration_Customer" FromRole="Registration_Customer" ToRole="Customer_Wishlist" />
+          <NavigationProperty Name="Order_ExtraPackage" Relationship="GamePlatformModel.FK_Order_ExtraPackage_Registration_Customer" FromRole="Registration_Customer" ToRole="Order_ExtraPackage" />
+          <NavigationProperty Name="Order_Game" Relationship="GamePlatformModel.FK_Customer_Purchase_Registration_Customer" FromRole="Registration_Customer" ToRole="Order_Game" />
+        </EntityType>
+        <Association Name="FK_Customer_Wishlist_Registration_Customer">
+          <End Type="GamePlatformModel.Registration_Customer" Role="Registration_Customer" Multiplicity="1" />
+          <End Type="GamePlatformModel.Customer_Wishlist" Role="Customer_Wishlist" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Registration_Customer">
+              <PropertyRef Name="CustomerID" />
+            </Principal>
+            <Dependent Role="Customer_Wishlist">
+              <PropertyRef Name="CustomerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Order_ExtraPackage_Registration_Customer">
+          <End Type="GamePlatformModel.Registration_Customer" Role="Registration_Customer" Multiplicity="1" />
+          <End Type="GamePlatformModel.Order_ExtraPackage" Role="Order_ExtraPackage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Registration_Customer">
+              <PropertyRef Name="CustomerID" />
+            </Principal>
+            <Dependent Role="Order_ExtraPackage">
+              <PropertyRef Name="CustomerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Customer_Purchase_Registration_Customer">
+          <End Type="GamePlatformModel.Registration_Customer" Role="Registration_Customer" Multiplicity="1" />
+          <End Type="GamePlatformModel.Order_Game" Role="Order_Game" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Registration_Customer">
+              <PropertyRef Name="CustomerID" />
+            </Principal>
+            <Dependent Role="Order_Game">
+              <PropertyRef Name="CustomerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <ComplexType Name="SP_GetGames_Result">
+          <Property Type="Int32" Name="GameID" Nullable="false" />
+          <Property Type="String" Name="GameName" Nullable="false" MaxLength="50" />
+          <Property Type="DateTime" Name="ReleaseDate" Nullable="true" />
+          <Property Type="Int32" Name="AgeLimit" Nullable="true" />
+          <Property Type="Int32" Name="DeveloperID" Nullable="false" />
+          <Property Type="Int32" Name="PublisherID" Nullable="false" />
+          <Property Type="String" Name="Explanation" Nullable="true" MaxLength="400" />
+          <Property Type="Double" Name="AvaragePoint" Nullable="true" />
+          <Property Type="String" Name="OprSystem" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="CPU" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Storage" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="Graphics" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Memory" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="PublisherCompanyName" Nullable="false" MaxLength="30" />
+          <Property Type="String" Name="DeveloperCompanyName" Nullable="false" MaxLength="30" />
+        </ComplexType>
+        <ComplexType Name="SP_GetBuyGame_Result">
+          <Property Type="Int32" Name="GameID" Nullable="false" />
+          <Property Type="String" Name="GameName" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="PackageName" Nullable="false" MaxLength="50" />
+          <Property Type="Decimal" Name="Price" Nullable="false" Precision="19" />
+        </ComplexType>
+        <ComplexType Name="SP_GetBuyGame1_Result">
+          <Property Type="Int32" Name="OrderID" Nullable="false" />
+          <Property Type="Int32" Name="GameID" Nullable="false" />
+          <Property Type="String" Name="GameName" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="PackageName" Nullable="false" MaxLength="50" />
+          <Property Type="Decimal" Name="Price" Nullable="false" Precision="19" />
+        </ComplexType>
+        <ComplexType Name="SP_GetBuyExtra_Result">
+          <Property Type="Int32" Name="OrderID" Nullable="false" />
+          <Property Type="String" Name="GameName" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="ExtraPackageName" Nullable="false" MaxLength="40" />
+          <Property Type="Int32" Name="GameID" Nullable="false" />
+          <Property Type="Decimal" Name="Price" Nullable="false" Precision="19" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="GamePlatformModelStoreContainer" CdmEntityContainer="GamePlatformEntities">
+          <EntitySetMapping Name="Buy_ExtraPackage">
+            <EntityTypeMapping TypeName="GamePlatformModel.Buy_ExtraPackage">
+              <MappingFragment StoreEntitySet="Buy_ExtraPackage">
+                <ScalarProperty Name="OrderID" ColumnName="OrderID" />
+                <ScalarProperty Name="GameID" ColumnName="GameID" />
+                <ScalarProperty Name="ExtraPackageName" ColumnName="ExtraPackageName" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Buy_Game">
+            <EntityTypeMapping TypeName="GamePlatformModel.Buy_Game">
+              <MappingFragment StoreEntitySet="Buy_Game">
+                <ScalarProperty Name="OrderID" ColumnName="OrderID" />
+                <ScalarProperty Name="GameID" ColumnName="GameID" />
+                <ScalarProperty Name="PackageID" ColumnName="PackageID" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Customer_Wishlist">
+            <EntityTypeMapping TypeName="GamePlatformModel.Customer_Wishlist">
+              <MappingFragment StoreEntitySet="Customer_Wishlist">
+                <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
+                <ScalarProperty Name="OrderExtraPackageID" ColumnName="OrderExtraPackageID" />
+                <ScalarProperty Name="OrderGameID" ColumnName="OrderGameID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Order_ExtraPackage">
+            <EntityTypeMapping TypeName="GamePlatformModel.Order_ExtraPackage">
+              <MappingFragment StoreEntitySet="Order_ExtraPackage">
+                <ScalarProperty Name="PurchaseID" ColumnName="PurchaseID" />
+                <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
+                <ScalarProperty Name="CouponID" ColumnName="CouponID" />
+                <ScalarProperty Name="OrderExtraPackageID" ColumnName="OrderExtraPackageID" />
+                <ScalarProperty Name="PaymentDate" ColumnName="PaymentDate" />
+                <ScalarProperty Name="UploadOnDesktop" ColumnName="UploadOnDesktop" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Order_Game">
+            <EntityTypeMapping TypeName="GamePlatformModel.Order_Game">
+              <MappingFragment StoreEntitySet="Order_Game">
+                <ScalarProperty Name="PurchaseID" ColumnName="PurchaseID" />
+                <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
+                <ScalarProperty Name="CouponID" ColumnName="CouponID" />
+                <ScalarProperty Name="OrderGameID" ColumnName="OrderGameID" />
+                <ScalarProperty Name="PaymentDate" ColumnName="PaymentDate" />
+                <ScalarProperty Name="UploadOnDesktop" ColumnName="UploadOnDesktop" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Registration_Company">
+            <EntityTypeMapping TypeName="GamePlatformModel.Registration_Company">
+              <MappingFragment StoreEntitySet="Registration_Company">
+                <ScalarProperty Name="CompanyID" ColumnName="CompanyID" />
+                <ScalarProperty Name="CompanyName" ColumnName="CompanyName" />
+                <ScalarProperty Name="Location" ColumnName="Location" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Registration_Coupon">
+            <EntityTypeMapping TypeName="GamePlatformModel.Registration_Coupon">
+              <MappingFragment StoreEntitySet="Registration_Coupon">
+                <ScalarProperty Name="CouponID" ColumnName="CouponID" />
+                <ScalarProperty Name="CouponName" ColumnName="CouponName" />
+                <ScalarProperty Name="DiscountPercentage" ColumnName="DiscountPercentage" />
+                <ScalarProperty Name="DiscountFee" ColumnName="DiscountFee" />
+                <ScalarProperty Name="Explanation" ColumnName="Explanation" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Registration_Game">
+            <EntityTypeMapping TypeName="GamePlatformModel.Registration_Game">
+              <MappingFragment StoreEntitySet="Registration_Game">
+                <ScalarProperty Name="GameID" ColumnName="GameID" />
+                <ScalarProperty Name="GameName" ColumnName="GameName" />
+                <ScalarProperty Name="ReleaseDate" ColumnName="ReleaseDate" />
+                <ScalarProperty Name="AgeLimit" ColumnName="AgeLimit" />
+                <ScalarProperty Name="DeveloperID" ColumnName="DeveloperID" />
+                <ScalarProperty Name="PublisherID" ColumnName="PublisherID" />
+                <ScalarProperty Name="Explanation" ColumnName="Explanation" />
+                <ScalarProperty Name="AvaragePoint" ColumnName="AvaragePoint" />
+                <ScalarProperty Name="OprSystem" ColumnName="OprSystem" />
+                <ScalarProperty Name="CPU" ColumnName="CPU" />
+                <ScalarProperty Name="Storage" ColumnName="Storage" />
+                <ScalarProperty Name="Graphics" ColumnName="Graphics" />
+                <ScalarProperty Name="Memory" ColumnName="Memory" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Type_Genres">
+            <EntityTypeMapping TypeName="GamePlatformModel.Type_Genres">
+              <MappingFragment StoreEntitySet="Type_Genres">
+                <ScalarProperty Name="GenreID" ColumnName="GenreID" />
+                <ScalarProperty Name="GrenreType" ColumnName="GrenreType" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Type_Language">
+            <EntityTypeMapping TypeName="GamePlatformModel.Type_Language">
+              <MappingFragment StoreEntitySet="Type_Language">
+                <ScalarProperty Name="LanguageID" ColumnName="LanguageID" />
+                <ScalarProperty Name="LanguageName" ColumnName="LanguageName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Type_Package">
+            <EntityTypeMapping TypeName="GamePlatformModel.Type_Package">
+              <MappingFragment StoreEntitySet="Type_Package">
+                <ScalarProperty Name="PackageID" ColumnName="PackageID" />
+                <ScalarProperty Name="PackageName" ColumnName="PackageName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Type_Player">
+            <EntityTypeMapping TypeName="GamePlatformModel.Type_Player">
+              <MappingFragment StoreEntitySet="Type_Player">
+                <ScalarProperty Name="PlayerTypeID" ColumnName="PlayerTypeID" />
+                <ScalarProperty Name="GameID" ColumnName="GameID" />
+                <ScalarProperty Name="Single" ColumnName="Single" />
+                <ScalarProperty Name="Multiplayer" ColumnName="Multiplayer" />
+                <ScalarProperty Name="Controller" ColumnName="Controller" />
+                <ScalarProperty Name="Co_Op" ColumnName="Co-Op" />
+                <ScalarProperty Name="VR" ColumnName="VR" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="Game_Genres" TypeName="GamePlatformModel.Game_Genres" StoreEntitySet="Game_Genres">
+            <EndProperty Name="Registration_Game">
+              <ScalarProperty Name="GameID" ColumnName="GameID" />
+            </EndProperty>
+            <EndProperty Name="Type_Genres">
+              <ScalarProperty Name="GenreID" ColumnName="GenreID" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="LanguageSupport_Audio" TypeName="GamePlatformModel.LanguageSupport_Audio" StoreEntitySet="LanguageSupport_Audio">
+            <EndProperty Name="Registration_Game">
+              <ScalarProperty Name="GameID" ColumnName="GameID" />
+            </EndProperty>
+            <EndProperty Name="Type_Language">
+              <ScalarProperty Name="LanguageID" ColumnName="AudioLanguageID" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="LanguageSupport_Texts" TypeName="GamePlatformModel.LanguageSupport_Texts" StoreEntitySet="LanguageSupport_Texts">
+            <EndProperty Name="Registration_Game">
+              <ScalarProperty Name="GameID" ColumnName="GameID" />
+            </EndProperty>
+            <EndProperty Name="Type_Language">
+              <ScalarProperty Name="LanguageID" ColumnName="TextLanguageID" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <EntitySetMapping Name="Registration_Customer">
+            <EntityTypeMapping TypeName="GamePlatformModel.Registration_Customer">
+              <MappingFragment StoreEntitySet="Registration_Customer">
+                <ScalarProperty Name="TelNumber" ColumnName="TelNumber" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Location" ColumnName="Location" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="RegisterDate" ColumnName="RegisterDate" />
+                <ScalarProperty Name="Age" ColumnName="Age" />
+                <ScalarProperty Name="NameSurname" ColumnName="NameSurname" />
+                <ScalarProperty Name="CustomerNickname" ColumnName="CustomerNickname" />
+                <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="SP_GetGames" FunctionName="GamePlatformModel.Store.SP_GetGames">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="GamePlatformModel.SP_GetGames_Result">
+                <ScalarProperty Name="GameID" ColumnName="GameID" />
+                <ScalarProperty Name="GameName" ColumnName="GameName" />
+                <ScalarProperty Name="ReleaseDate" ColumnName="ReleaseDate" />
+                <ScalarProperty Name="AgeLimit" ColumnName="AgeLimit" />
+                <ScalarProperty Name="DeveloperID" ColumnName="DeveloperID" />
+                <ScalarProperty Name="PublisherID" ColumnName="PublisherID" />
+                <ScalarProperty Name="Explanation" ColumnName="Explanation" />
+                <ScalarProperty Name="AvaragePoint" ColumnName="AvaragePoint" />
+                <ScalarProperty Name="OprSystem" ColumnName="OprSystem" />
+                <ScalarProperty Name="CPU" ColumnName="CPU" />
+                <ScalarProperty Name="Storage" ColumnName="Storage" />
+                <ScalarProperty Name="Graphics" ColumnName="Graphics" />
+                <ScalarProperty Name="Memory" ColumnName="Memory" />
+                <ScalarProperty Name="PublisherCompanyName" ColumnName="PublisherCompanyName" />
+                <ScalarProperty Name="DeveloperCompanyName" ColumnName="DeveloperCompanyName" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SP_GetBuyGame1" FunctionName="GamePlatformModel.Store.SP_GetBuyGame">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="GamePlatformModel.SP_GetBuyGame1_Result">
+                <ScalarProperty Name="OrderID" ColumnName="OrderID" />
+                <ScalarProperty Name="GameID" ColumnName="GameID" />
+                <ScalarProperty Name="GameName" ColumnName="GameName" />
+                <ScalarProperty Name="PackageName" ColumnName="PackageName" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SP_GetBuyExtra" FunctionName="GamePlatformModel.Store.SP_GetBuyExtra">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="GamePlatformModel.SP_GetBuyExtra_Result">
+                <ScalarProperty Name="OrderID" ColumnName="OrderID" />
+                <ScalarProperty Name="GameName" ColumnName="GameName" />
+                <ScalarProperty Name="ExtraPackageName" ColumnName="ExtraPackageName" />
+                <ScalarProperty Name="GameID" ColumnName="GameID" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

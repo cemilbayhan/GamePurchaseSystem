@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="b01a704f3b8448bebd0e6883d2a3dc65" Name="Diagram1" ZoomLevel="67">
+        <EntityTypeShape EntityType="GamePlatformModel.Buy_ExtraPackage" Width="1.5" PointX="5.25" PointY="11.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="GamePlatformModel.Buy_Game" Width="1.5" PointX="8.25" PointY="15.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="GamePlatformModel.Customer_Wishlist" Width="1.5" PointX="7.5" PointY="8.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="GamePlatformModel.Order_ExtraPackage" Width="1.5" PointX="10.5" PointY="8.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="GamePlatformModel.Order_Game" Width="1.5" PointX="5.25" PointY="7" IsExpanded="true" />
+        <EntityTypeShape EntityType="GamePlatformModel.Registration_Company" Width="1.5" PointX="0.75" PointY="13" IsExpanded="true" />
+        <EntityTypeShape EntityType="GamePlatformModel.Registration_Coupon" Width="1.5" PointX="3" PointY="3.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="GamePlatformModel.Registration_Game" Width="1.5" PointX="3" PointY="13.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="GamePlatformModel.Type_Genres" Width="1.5" PointX="5.25" PointY="17.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="GamePlatformModel.Type_Language" Width="1.5" PointX="5.25" PointY="19.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="GamePlatformModel.Type_Package" Width="1.5" PointX="6" PointY="14.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="GamePlatformModel.Type_Player" Width="1.5" PointX="5.25" PointY="22.5" IsExpanded="true" />
+        <AssociationConnector Association="GamePlatformModel.FK_Customer_Wishlist_Order_ExtraPackage" ManuallyRouted="false" />
+        <AssociationConnector Association="GamePlatformModel.FK_Order_ExtraPackage_Buy_ExtraPackage" ManuallyRouted="false" />
+        <AssociationConnector Association="GamePlatformModel.FK_Order_ExtraPackage_Registration_Game" ManuallyRouted="false" />
+        <AssociationConnector Association="GamePlatformModel.FK_Customer_Purchase_Order_Game1" ManuallyRouted="false" />
+        <AssociationConnector Association="GamePlatformModel.FK_Customer_Wishlist_Order_Game" ManuallyRouted="false" />
+        <AssociationConnector Association="GamePlatformModel.FK_Order_Game_Registration_Game" ManuallyRouted="false" />
+        <AssociationConnector Association="GamePlatformModel.FK_Order_Game_Type_Package" ManuallyRouted="false" />
+        <AssociationConnector Association="GamePlatformModel.FK_Order_ExtraPackage_Registration_Coupon" ManuallyRouted="false" />
+        <AssociationConnector Association="GamePlatformModel.FK_Customer_Purchase_Registration_Coupon" ManuallyRouted="false" />
+        <AssociationConnector Association="GamePlatformModel.FK_Registration_Game_Registration_Company" ManuallyRouted="false" />
+        <AssociationConnector Association="GamePlatformModel.FK_Registration_Game_Registration_Company1" ManuallyRouted="false" />
+        <AssociationConnector Association="GamePlatformModel.FK_Type_Player_Registration_Game" ManuallyRouted="false" />
+        <AssociationConnector Association="GamePlatformModel.Game_Genres" ManuallyRouted="false" />
+        <AssociationConnector Association="GamePlatformModel.LanguageSupport_Audio" ManuallyRouted="false" />
+        <AssociationConnector Association="GamePlatformModel.LanguageSupport_Texts" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="GamePlatformModel.Registration_Customer" Width="1.5" PointX="3" PointY="7.5" />
+        <AssociationConnector Association="GamePlatformModel.FK_Customer_Wishlist_Registration_Customer" />
+        <AssociationConnector Association="GamePlatformModel.FK_Order_ExtraPackage_Registration_Customer" />
+        <AssociationConnector Association="GamePlatformModel.FK_Customer_Purchase_Registration_Customer" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
